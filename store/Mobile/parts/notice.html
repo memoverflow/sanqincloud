@@ -1,0 +1,15 @@
+<div class="am-notice">
+    <a href="/mobile/list.html?catagory=0"><p class="am-notice-title">信息<br>公开</p></a>
+    <div class="swiper-container am-notice-container">
+        <ul id="am-news-container" class="swiper-wrapper"></ul>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<script id="sq-news-template" type="text/x-handlebars-template">
+    {{#each result}}
+    <li class="swiper-slide">
+        <strong>{{ContentTitle}}</strong>
+        <p>{{txtsp Description}}</p>
+    </li>
+    {{/each}}
+</script>

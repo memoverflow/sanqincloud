@@ -1,0 +1,16 @@
+<header class="am-topbar am-topbar-fixed-top">
+    <h1 class="am-logo"><a href="/mobile/index.html"><img src="assets/images/logo.png" width="100%" alt="三秦企业云"></a></h1>
+    <div class="am-topbar-login"><a href="#">登录</a> </div>
+    <a href="#" class="am-topbar-search"><span class="am-icon am-icon-search"></span></a>
+</header>
+<div class="am-banner am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
+    <ul id="am-banner-container" class="am-slides">
+    </ul>
+</div>
+<script id="sq-common-template" type="text/x-handlebars-template">
+    {{#each result}}
+    <li class="am-banner-01">
+        <a href=""><img class="am-img-responsive" src="/CMSAttachment/{{TitleImageName}}"/></a>
+    </li>
+    {{/each}}
+</script>

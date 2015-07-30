@@ -1,0 +1,16 @@
+<p class="am-home-title"><strong>成功案例</strong><span>Successful Cases</span></p>
+<div class="am-case">
+    <div class="swiper-container">
+        <ul id="am-cases-container" class="swiper-wrapper"></ul>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<script id="sq-cases-template" type="text/x-handlebars-template">
+    {{#each result}}
+    <li class="swiper-slide">
+        <p class="am-case-logo"><img src="/CMSAttachment/{{HashFolderName}}/{{TitleImageName}}"></p>
+        <strong>{{ContentTitle}}</strong>
+        <span>{{txtsp Summary}}</span>
+    </li>
+    {{/each}}
+</script>

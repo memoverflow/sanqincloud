@@ -1,0 +1,88 @@
+html,body{ height: 100%; background: #fff; }
+ul{ list-style: none; padding: 0px; margin: 0px; }
+.am-with-topbar-fixed-top{ padding-top: 50px; }
+/*ҳͷ====================*/
+header.am-topbar{ background-color: #333; border: none; }
+header.am-topbar .am-logo{ float: left; width: 40%; height: 50px; background: #0091c8; margin: 0px; padding-left: 1.5rem; font-size: 0px; }
+header.am-topbar .am-logo a{ display: block; height: 50px; line-height: 50px; width: 80%; }
+header.am-topbar .am-topbar-login{ float: left; line-height: 50px; margin-left: 10px; color: #555; }
+header.am-topbar .am-topbar-login a{ color: #fff; padding: 0px 10px; }
+header.am-topbar .am-topbar-search{ float: right; display: block; width: 50px; height: 50px; text-align: center; line-height: 50px; color: #fff; font-size: 2.0rem; background-color: #252525; }
+/*����ͼ====================*/
+.am-banner{ position:relative;}
+.am-banner ul{ margin: 0px; padding: 0px; height: 100%; }
+.am-banner ul li{ list-style: none; padding: 0px; height: 100%; }
+.am-banner ul li.am-banner-01{ background: top right no-repeat; background-size: 100% auto; }
+.am-banner .am-banner-text{ width: 40%; height: 100%; background-color: rgba(0,174,239,0.8); color: #fff; padding: 1.2rem; }
+.am-banner .am-banner-text strong{ display: block; }
+.am-banner .am-banner-text span{ display: block; margin-top: 10px; font-family: Helvetica; font-size: 1.2rem; line-height: 150%; }
+.am-banner-tab{ position: absolute; bottom: 0px; left: 1.2rem; }
+.am-banner-tab a{ display: inline-block; margin-right: 2px; width: 8px; height: 8px; color: #fff; background-color: rgba(255,255,255,0.5); border-radius: 8px; }
+.am-banner-tab a.am-selected{ background-color: rgba(255,255,255,1); }
+/*����====================*/
+.am-nav li a{ display: block; padding: 1.2rem 15px; border-bottom: solid 1px #eee; color: #555; }
+.am-nav li a strong{ margin-left: 15px; font-size: 1.4rem; }
+.am-nav li a i{ float: right; color: #aaa; }
+/*����====================*/
+.am-notice{ position: relative; background-color: #f5f5f5; border-bottom: solid 1px #eee; padding: 1.2rem; }
+.am-notice-title{ position: absolute; top: 1.6rem; left: 1.2rem; width: 70px; padding: 10px 0px; background: #f7941d; color: #fff; font-weight: bold; text-align: center; font-size: 1.6rem; }
+.am-notice ul{ padding-left: 0px; }
+.am-notice .am-notice-container{margin-left:90px;margin-right:10px;}
+.am-notice li{ display:block;overflow:hidden; }
+.am-notice ul li strong{ font-size: 1.4rem; line-height: 100%; }
+.am-notice ul li p{ font-size: 1.2rem; color: #888; margin: 5px 0px; }
+.am-notice-tab{ text-align: center; margin: 0px; }
+.am-notice-tab a{ display: inline-block; width: 6px; height: 6px; color: #fff; background-color: #ccc; border-radius: 6px; }
+.am-notice-tab a.am-selected{ background-color: #888; }
+/*����====================*/
+.am-metro ul{ border-bottom: solid 1px #eee; }
+.am-metro li{ border-right: solid 1px #eee; padding: 2rem 0px; text-align: center; }
+.am-metro li:nth-chlid(3){ border: none; }
+.am-metro li i{ display: block; width: 30px; height: 30px; margin: 0px auto; }
+.am-metro li strong{ display: block; font-size: 1.4rem; color: #555; margin-top: 10px; }
+.am-metro li span{ display: block; font-size: 9px; color: #aaa; white-space: nowrap; }
+/*��ҳ����====================*/
+.am-home-title{ padding: 2rem 0px; margin: 0px; text-align: center; border-bottom: solid 1px #eee; }
+.am-home-title strong{ display: block; font-size: 1.8rem; color: #555; }
+.am-home-title span{ display: block; font-size: 1.2rem; color: #888; }
+/*����====================*/
+.am-case {height:170px;}
+.am-case li{ margin-top: 40px; padding-right: 2rem; overflow: hidden; }
+.am-case li .am-case-logo{ width: 40%; float: left; }
+.am-case li .am-case-logo img{ max-width: 120px;max-height:100px;margin:5px; }
+.am-case li strong{ float: left; width: 60%; display: block; }
+.am-case li span{ float: left; display: block; width: 60%; font-size: 1.2rem; color: #888; }
+.am-case-more{ margin: 20px 0px; text-align: center; }
+.am-case-more span{ display: inline-block; width: 6px; height: 6px; border-radius: 6px; margin: 0px 2px; background-color: #f7941d; }
+/*����====================*/
+.am-links ul{ padding: 0px; }
+.am-links ul:nth-child(1){ border-right: solid 1px #555; }
+.am-links li{ background: #333; white-space: nowrap; overflow: hidden; border-bottom: solid 1px #555; }
+.am-links li a{ display: block; padding: 1.2rem; color: #fff; font-size: 1.4rem; }
+/*ҳ��====================*/
+.am-footer{ background: #222222; }
+.am-footer-menu a{ display: inline-block; color: #aaa; font-size: 1.4rem; margin: 10px; }
+.am-footer-text{ color: #888; font-size: 12px!important; margin: 10px 0px; }
+/*ҳ�����====================*/
+.am-page-title{ padding: 2rem; margin: 0px; border-bottom: solid 1px #eee; }
+.am-page-title strong{ display: block; font-size: 1.8rem; color: #555; }
+.am-page-title span{ display: block; font-size: 1.2rem; color: #888; }
+.am-page-title .am-back-page{ display: inline-block; color: #888; line-height: 4.2rem; float: left; margin-right: 2rem; }
+/*�̳��б�====================*/
+.am-store-list li{ position: relative; padding: 20px 2rem 20px 100px; border-bottom: solid 1px #eee; }
+.am-store-img{ position: absolute; top: 25px; left: 2rem; width: 60px; height: 60px; }
+.am-store-title{ float: left; }
+.am-store-price{ float: right; color: #F00; font-size: 1.6rem; margin-bottom: 5px; font-weight: bold; }
+.am-store-info{ clear: both; margin: 10px 0px; font-size: 1.2rem; color: #888; }
+.am-store-links{ margin: 10px 0px; font-size: 1.2rem; }
+.am-store-links a{ display: inline-block; margin-right: 10px; line-height: 30px; }
+.am-store-links a.am-btn-tryout{ display: inline-block; background: #f7941d; font-size: 1.4rem; font-weight: bold; color: #fff; padding: 0px 10px; margin-right: 10px; }
+.am-store-more{ margin: 0px;display:block; text-align: center; backgroud: #f5f5f5; padding-bottom: 10px; }
+.am-store-more:hover{ cursor: pointer }
+.am-store-more span{ display: inline-block; width: 6px; height: 6px; border-radius: 6px; margin: 0px 2px; background-color: #888; }
+/*��ϸ����====================*/
+.am-page-content{ padding: 4rem 2.4rem; overflow: hidden; font-size: 1.4rem; color: #555; line-height: 180%; }
+.am-page-content-title{ text-align: center; font-size: 1.8rem; color: #333; }
+.am-content-date{ font-size: 1.2rem; color: #888; display: block; text-align: center; }
+.am-page-content p{ font-size: 1.4rem; color: #555; }
+
