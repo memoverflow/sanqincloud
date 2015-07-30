@@ -21,9 +21,15 @@ define(["common","data"],function(common,data){
 
         },
         init:function(){
-            common.loading(true);
-            common.helper();
-            common.getLinks(1,8);
+            common.renderParts()
+                .done(function(){
+                    common.loading(true);
+                    common.helper();
+                    common.getContent();
+                    common.getBanners(1,3);
+                    common.getLinks(1,8);
+
+                });
         }
     };
     news.init();

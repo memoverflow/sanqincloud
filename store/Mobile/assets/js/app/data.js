@@ -61,9 +61,23 @@ define(["app/http"],function($http){
             },
             links:{
                 url:"/api/CMSContent/GetLinkServiceContents/",
+                desc:"相关链接",
+                action:function(pageIndex,pageSize){
+                    return $http.get(this.url+"?pageIndex="+pageIndex+"&pageSize="+pageSize);
+                }
+            },
+            hotapp:{
+                url:"/Api/SiProduct/GetHotAppList/",
                 desc:"热门应用",
                 action:function(pageIndex,pageSize){
                     return $http.get(this.url+"?pageIndex="+pageIndex+"&pageSize="+pageSize);
+                }
+            },
+            content:{
+                url:"/api/CMSContent/GetCMSContent/",
+                desc:"获取内容",
+                action:function(id){
+                    return $http.get(this.url+"?contentid="+id);
                 }
             }
         },
@@ -89,7 +103,7 @@ define(["app/http"],function($http){
         part:{
             desc:"获取部件",
             action:function(url){
-                return $.get(url);
+                return $.get(url+"?rnd="+new Date().getMilliseconds());
             }
         }
     }

@@ -40,7 +40,8 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             {name:"notice",url:"parts/notice.html"},
             {name:"list",url:"parts/list.html"},
             {name:"store",url:"parts/store.html"},
-            {name:"details",url:"parts/details.html"}
+            {name:"details",url:"parts/details.html"},
+            {name:"news",url:"parts/news.html"}
         ],
         listAction:[
             {title:"信息公开",action:data.main.news.action},
@@ -104,6 +105,7 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
         },
         getBanners:function(pageIndex,pageSize){
             data.main.banners.action(pageIndex,pageSize).done(function(result){
+                console.log(result)
                 common.compile("#sq-common-template","#am-banner-container",{result:result.DataSource});
                 $(".am-banner").flexslider();
             }).fail(function(){
@@ -160,8 +162,8 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
         getStoreDetails:function(){
             var id = this.queryString("id");
             data.store.details.action(id).done(function(result){
-                console.log(result)
-                common.compile("#sq-details-template","#am-details-container",result);
+                $(".am-page-content-title").text(result.ProductName);
+                $("#am-content-html").html(result.Description);
                 common.loading(false);
             }).fail(function(){
                 common.showMessage("获取成功案例数据失败!");
@@ -186,6 +188,17 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
 
             }).fail(function(){
                 common.showMessage("获取成功案例数据失败!");
+            });
+        },
+        getContent:function(){
+            var id = this.queryString("ContentID");
+            data.main.content.action(id).done(function(result){
+                console.log(result)
+                $(".am-page-content-title").text(result.ContentTitle);
+                $("#am-content-html").html(result.Description);
+                common.loading(false);
+            }).fail(function(){
+                common.showMessage("获取内容数据失败!");
             });
         }
     };

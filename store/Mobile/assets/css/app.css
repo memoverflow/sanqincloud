@@ -1,5 +1,6 @@
 html,body{ height: 100%; background: #fff; }
 ul{ list-style: none; padding: 0px; margin: 0px; }
+a{color:#333;}
 .am-with-topbar-fixed-top{ padding-top: 50px; }
 /*ҳͷ====================*/
 header.am-topbar{ background-color: #333; border: none; }
