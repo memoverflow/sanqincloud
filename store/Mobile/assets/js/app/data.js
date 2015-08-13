@@ -98,12 +98,26 @@ define(["app/http"],function($http){
                     var url = this.url+"?productid="+id;
                     return $http.get(url);
                 }
+            },
+            add:{
+                desc:"试用商品",
+                url:"/api/ShoppingCart/Add",
+                action:function(json){
+                    return $http.put(this.url,json);
+                }
             }
         },
         part:{
             desc:"获取部件",
             action:function(url){
                 return $.get(url+"?rnd="+new Date().getMilliseconds());
+            }
+        },
+        user:{
+            desc:"获取当前用户",
+            url:" /api/ECOrder/GetCurrentUser",
+            action:function(){
+                return $http.get(this.url);
             }
         }
     }

@@ -30,6 +30,8 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             var template = Handlebars.compile(source);
             $(target).html(template(dataJson));
         },
+        loginUrl:"https://sts.fengxicloud.com/adfs/ls/?wa=wsignin1.0&wtrealm=https://www.sanqincloud.com&wctx=rm%3d0%26id%3dpassive%26ru%3d%252f&wct=2015-04-09T08%3a05%3a07Z",
+        currentUser:{},
         views:[
             {name:"cases",url:"parts/cases.html"},
             {name:"header",url:"parts/header.html"},
@@ -41,8 +43,13 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             {name:"list",url:"parts/list.html"},
             {name:"store",url:"parts/store.html"},
             {name:"details",url:"parts/details.html"},
-            {name:"news",url:"parts/news.html"}
+            {name:"news",url:"parts/news.html"},
+            {name:"search",url:"parts/search.html"},
+            {name:"contact",url:"parts/contact.html"},
+            {name:"head",url:"parts/head.html"}
+
         ],
+        head:"parts/head.html",
         listAction:[
             {title:"信息公开",action:data.main.news.action},
             {title:"新手指南",action:data.main.fisher.action},
@@ -52,28 +59,36 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             {title:"体验中心",action:data.main.experience.action},
         ],
         loading:function(status){
-            var loading = $("#am-modal-loading");
-            if(status){
-                loading.modal();
-            }else{
-                loading.modal("close");
+            if(!status){
+                $("#modal").hide();
             }
         },
         getPart: function(item) {
             return data.part.action(item.url);
         },
         renderParts:function(){
+            //render head
+            $("body").hide();
             var parts = [];
+            parts.push(common.views[common.views.length-1]);
             $("body").find("div").each(function(i){
                 var id = $(this).attr("id");
                 parts.push(common.lookup(id));
+
             });
             var promises = parts.map(common.getPart);
             return $.when.apply(this, promises).then(function(){
                 $(arguments).each(function(i){
-                    $("#"+parts[i].name).html(this[0]);
+                    if(parts[i].name == "head") {
+                        $("head").html(this[0]);
+                    }
+                    else
+                        $("#"+parts[i].name).html(this[0]);
                 });
+                $("body").show();
             });
+
+
         },
         lookup:function(id){
             for(var i = 0;i<common.views.length;i++){
@@ -92,9 +107,51 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]); return null;
         },
+        login:function(){
+            var cookie = $.AMUI.utils.cookie;
+            var user = JSON.parse(cookie.get("user"));
+            var loginUser = {};
+            if(user == null || user.UserID == undefined ){
+                //获取当前是否登录
+                data.user.action().done(function(result){
+                    loginUser = result;
+                   if(result == null){
+                       $(".am-topbar-login").find("a").attr("href",common.loginUrl);
+                   }else{
+                       $(".am-topbar-login").find("a").text("欢迎您 "+result.UserName);
+                   }
+                });
+
+                cookie.set("user",JSON.stringify(loginUser));
+            }else{
+                $(".am-topbar-login").find("a").text("欢迎您 "+result.UserName);
+            }
+            this.currentUser = loginUser;
+        },
+        init:function(){
+            this.login();
+            $(".am-topbar-search").click(function(){
+                $("#sq-common-search").modal();
+                $(".am-modal-prompt-input").focus();
+            });
+            $("#sq-search-cancel").click(function(){$("#sq-common-search").modal("close");});
+            $("#sq-search-confirm").click(function(){
+                var val = $(".am-modal-prompt-input").val();
+                window.location = "store.html?search="+val;
+                $("#sq-common-search").modal("close");
+            });
+        },
         helper:function(){
             Handlebars.registerHelper('txtsp', function(html) {
                 var result = html.replace(/<\/?.+?>/g,"").substr(0,80);
+                return new Handlebars.SafeString(result);
+            });
+            Handlebars.registerHelper('preview', function(img) {
+                var result = (img == ""|| img ==null)?"mobile/assets/images/preview.png":img;
+                return new Handlebars.SafeString(result);
+            });
+            Handlebars.registerHelper('attachment', function(attachment) {
+                var result = (attachment == ""|| attachment ==attachment)?"javascript:void(0)":"/"+attachment;
                 return new Handlebars.SafeString(result);
             });
         },
@@ -105,7 +162,6 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
         },
         getBanners:function(pageIndex,pageSize){
             data.main.banners.action(pageIndex,pageSize).done(function(result){
-                console.log(result)
                 common.compile("#sq-common-template","#am-banner-container",{result:result.DataSource});
                 $(".am-banner").flexslider();
             }).fail(function(){
@@ -120,6 +176,14 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
                 $(".am-notice .swiper-container").swiper({
                     pagination: '.am-notice .swiper-container .swiper-pagination'
                 });
+            }).fail(function(){
+                common.showMessage("获取信息数据失败!");
+            });
+        },
+        getHotApp:function(pageIndex,pageSize){
+            data.main.hotapp.action(pageIndex,pageSize).done(function(result){
+                console.log(result)
+                common.compile("#sq-hotapp-template","#am-hotapp-container",{result:result.DataSource});
             }).fail(function(){
                 common.showMessage("获取信息数据失败!");
             });
@@ -141,9 +205,10 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
                 common.showMessage("获取成功案例数据失败!");
             });
         },
-        getStoreList:function(pageIndex,pageSize,productName){
+        getStoreList:function(pageIndex,pageSize){
+            var query = this.queryString("search");
+            var productName = query == null?"": query;
             data.store.list.action(pageIndex,pageSize,productName).done(function(result){
-                console.log(result)
                 if(result == null || result.DataSource == null || result.DataSource.length == 0)
                     return;
                 if(pageIndex>1) {
@@ -174,7 +239,6 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             var item = this.listAction[catagory];
             $("#newsTitle").text(item.title);
             item.action(pageIndex,pageSize).done(function(result){
-                console.log(result)
                 if(result == null || result.DataSource == null || result.DataSource.length == 0)
                     return;
                 if(pageIndex>1) {
@@ -193,12 +257,36 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
         getContent:function(){
             var id = this.queryString("ContentID");
             data.main.content.action(id).done(function(result){
-                console.log(result)
                 $(".am-page-content-title").text(result.ContentTitle);
                 $("#am-content-html").html(result.Description);
                 common.loading(false);
             }).fail(function(){
                 common.showMessage("获取内容数据失败!");
+            });
+        },
+        addOrder:function(){
+            $("#sq-store-template").find(".am-btn-tryout").on("click",function(){
+                var cookie = $.AMUI.utils.cookie;
+                //第一步,判断当前是否登录
+                if(common.currentUser.UserID){
+                    var item = {
+                        CreateUser:common.currentUser.UserID,
+                        ProductID:common.queryString("id"),
+                        Count:1,
+                        CreateUserType:1,
+                        CreateTime:new Date(),
+                        StatusId:1,
+                        ShoppingCartId:1
+                    }
+                    data.store.add(item).done(function(){
+                        common.showMessage("试用成功,请转到自服务门户查看!");
+                    }).fail(function(){
+                        common.showMessage("添加订单失败,请联系网站管理员!");
+                    });
+                }
+                else{
+                    window.location = common.loginUrl;
+                }
             });
         }
     };

@@ -6,18 +6,19 @@
     </ul>
 </div>
 <p class="am-home-title"><strong>热门应用</strong><span>Hot Application</span></p>
+
 <div class="am-metro">
-    <ul class="am-g am-g-fixed">
-        <li class="am-u-sm-4"><i class="am-icon am-icon-envelope am-icon-md" style="color: #00aeef;"></i><strong>企业邮箱</strong><span>Enterprise Email</span></li>
-        <li class="am-u-sm-4"><i class="am-icon am-icon-comments am-icon-md" style="color: #0072bc;"></i><strong>企业即时通信</strong><span>Instant Communication</span></li>
-        <li class="am-u-sm-4"><i class="am-icon am-icon-desktop am-icon-md" style="color: #2e3192;"></i><strong>协同办公系统</strong><span>Collaborative Office</span></li>
-    </ul>
-    <ul class="am-g am-g-fixed">
-        <li class="am-u-sm-4"><i class="am-icon am-icon-group am-icon-md" style="color: #f7941d;"></i><strong>客户关系管理</strong><span>Customer Relationship</span></li>
-        <li class="am-u-sm-4"><i class="am-icon am-icon-globe am-icon-md" style="color: #f26522;"></i><strong>企业建站</strong><span>Enterprise Website</span></li>
-        <li class="am-u-sm-4"><i class="am-icon am-icon-money am-icon-md" style="color: #ed1c24;"></i><strong>薪酬通</strong><span>The Salary Management</span></li>
-    </ul>
-    <ul class="am-g am-g-fixed">
-        <li class="am-u-sm-4"><i class="am-icon am-icon-server am-icon-md" style="color: #4b0049;"></i><strong>云主机</strong><span>Cloud Hosting</span></li>
+    <ul class="am-g am-g-fixed"  id="am-hotapp-container">
+
     </ul>
 </div>
+
+<script id="sq-hotapp-template" type="text/x-handlebars-template">
+    {{#each result}}
+    <a href="storedetails.html?id={{ProductID}}">
+        <li class="am-u-sm-4" style="border-bottom:1px solid #eee;">
+            <img src="/{{preview ProductLogo}}" style="width:50px;height:50px;"/>
+            <strong>{{ProductName}}</strong></li>
+    </a>
+    {{/each}}
+</script>

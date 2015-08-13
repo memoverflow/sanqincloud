@@ -15,20 +15,19 @@ require.config({
 define(["common","data"],function(common,data){
     "use strict"
 
-    var main = {
+    var store = {
+        currentIndex:1,
         init:function(){
             common.renderParts()
                 .done(function(){
                     common.loading(true);
                     common.helper();
-                    common.getBanners(1,3);
-                    common.getNews(1,13);
                     common.getLinks(1,8);
-                    common.getCases(1,6);
-                    common.getHotApp(1,6);
+                    common.getBanners(1,3);
                     common.init();
                 });
+
         }
     };
-    main.init();
+    store.init();
 });

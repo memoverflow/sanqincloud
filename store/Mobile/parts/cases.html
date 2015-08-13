@@ -7,10 +7,11 @@
 </div>
 <script id="sq-cases-template" type="text/x-handlebars-template">
     {{#each result}}
-    <li class="swiper-slide">
+    <li class="swiper-slide" style="margin-top:15px;">
         <p class="am-case-logo"><img src="/CMSAttachment/{{HashFolderName}}/{{TitleImageName}}"></p>
         <a href="news.html?contentid={{ContentID}}"><strong>{{ContentTitle}}</strong></a>
         <span>{{txtsp Summary}}</span>
+
     </li>
     {{/each}}
 </script>

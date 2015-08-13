@@ -25,7 +25,7 @@ define(["common","data"],function(common,data){
                     common.getLinks(1,8);
                     common.getBanners(1,3);
                     common.getStoreDetails();
-
+                    common.init();
                 });
 
         }
