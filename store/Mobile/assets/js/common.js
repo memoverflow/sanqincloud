@@ -90,6 +90,10 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
 
 
         },
+        hideMore:function(result,pageIndex,pageSize){
+            if(result.TotalRecord<=pageIndex * pageSize)
+                $(".am-store-more").hide();
+        },
         lookup:function(id){
             for(var i = 0;i<common.views.length;i++){
                 var item = common.views[i];
@@ -105,7 +109,7 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
         queryString:function(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
             var r = window.location.search.substr(1).match(reg);
-            if (r != null) return unescape(r[2]); return null;
+            if (r != null) return decodeURI(r[2]); return null;
         },
         login:function(){
             var cookie = $.AMUI.utils.cookie;
@@ -182,7 +186,6 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
         },
         getHotApp:function(pageIndex,pageSize){
             data.main.hotapp.action(pageIndex,pageSize).done(function(result){
-                console.log(result)
                 common.compile("#sq-hotapp-template","#am-hotapp-container",{result:result.DataSource});
             }).fail(function(){
                 common.showMessage("获取信息数据失败!");
@@ -205,10 +208,12 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
                 common.showMessage("获取成功案例数据失败!");
             });
         },
+
         getStoreList:function(pageIndex,pageSize){
             var query = this.queryString("search");
             var productName = query == null?"": query;
             data.store.list.action(pageIndex,pageSize,productName).done(function(result){
+                common.hideMore(result,pageIndex,pageSize);
                 if(result == null || result.DataSource == null || result.DataSource.length == 0)
                     return;
                 if(pageIndex>1) {
@@ -239,6 +244,7 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             var item = this.listAction[catagory];
             $("#newsTitle").text(item.title);
             item.action(pageIndex,pageSize).done(function(result){
+                common.hideMore(result,pageIndex,pageSize);
                 if(result == null || result.DataSource == null || result.DataSource.length == 0)
                     return;
                 if(pageIndex>1) {

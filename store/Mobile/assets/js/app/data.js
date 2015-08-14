@@ -87,6 +87,7 @@ define(["app/http"],function($http){
                 desc:"商城商品的列表",
                 url:"/api/SiProduct/GetProductList",
                 action:function(pageIndex,pageSize,productName){
+                    console.log(productName)
                     var url = this.url+"?pageIndex="+pageIndex+"&pageSize="+pageSize+"&productName="+productName;
                     return $http.get(url);
                 }
