@@ -46,6 +46,7 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             {name:"news",url:"parts/news.html"},
             {name:"search",url:"parts/search.html"},
             {name:"contact",url:"parts/contact.html"},
+            {name:"licences",url:"parts/licences.html"},
             {name:"head",url:"parts/head.html"}
 
         ],
@@ -111,26 +112,28 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return decodeURI(r[2]); return null;
         },
+
         login:function(){
             var cookie = $.AMUI.utils.cookie;
             var user = JSON.parse(cookie.get("user"));
-            var loginUser = {};
             if(user == null || user.UserID == undefined ){
                 //获取当前是否登录
                 data.user.action().done(function(result){
-                    loginUser = result;
-                   if(result == null){
-                       $(".am-topbar-login").find("a").attr("href",common.loginUrl);
-                   }else{
-                       $(".am-topbar-login").find("a").text("欢迎您 "+result.UserName);
-                   }
-                });
+                    user = result;
 
-                cookie.set("user",JSON.stringify(loginUser));
+                    if(result == null){
+                       $(".am-topbar-login").find("a").text("登录").attr("href",common.loginUrl);
+                    }else{
+                       $(".am-topbar-login").find("a").text("欢迎您 "+result.UserName);
+                    }
+                    cookie.set("user",JSON.stringify(user));
+                    common.currentUser = user;
+                });
             }else{
-                $(".am-topbar-login").find("a").text("欢迎您 "+result.UserName);
+                $(".am-topbar-login").find("a").text("欢迎您 "+user.UserName);
+                common.currentUser = user;
             }
-            this.currentUser = loginUser;
+
         },
         init:function(){
             this.login();
@@ -156,6 +159,10 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             });
             Handlebars.registerHelper('attachment', function(attachment) {
                 var result = (attachment == ""|| attachment ==attachment)?"javascript:void(0)":"/"+attachment;
+                return new Handlebars.SafeString(result);
+            });
+            Handlebars.registerHelper('json', function(json) {
+                var result = JSON.stringify(json);
                 return new Handlebars.SafeString(result);
             });
         },
@@ -220,10 +227,12 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
                     var html = '<ul id="am-store-container' + pageIndex + '"></ul>';
                     $(".am-store-list ul:last").after(html);
                     common.compile("#sq-store-template", "#am-store-container"+pageIndex, {result: result.DataSource});
+
                 }
                 else {
                     common.compile("#sq-store-template", "#am-store-container", {result: result.DataSource});
                 }
+                common.addOrder();
 
             }).fail(function(){
                 common.showMessage("获取成功案例数据失败!");
@@ -271,28 +280,45 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             });
         },
         addOrder:function(){
-            $("#sq-store-template").find(".am-btn-tryout").on("click",function(){
-                var cookie = $.AMUI.utils.cookie;
-                //第一步,判断当前是否登录
-                if(common.currentUser.UserID){
-                    var item = {
-                        CreateUser:common.currentUser.UserID,
-                        ProductID:common.queryString("id"),
-                        Count:1,
-                        CreateUserType:1,
-                        CreateTime:new Date(),
-                        StatusId:1,
-                        ShoppingCartId:1
+            $(".am-btn-tryout").click(function(){
+                var code = $(this).attr("data-store");
+                var price = $(this).attr("data-price");
+                var productId = $(this).attr("data-id");
+                common.loading(true);
+                $("#sq-common-number").modal();
+                $("#sq-number-cancel").click(function(){$("#sq-common-number").modal("close");});
+                $("#sq-number-confirm").click(function(){
+                    var val = $("#am-number").val();
+                    if(val > 0) {
+                        data.store.price.action(code, val).done(function (prices) {
+                            console.log(val)
+                            if (common.currentUser.UserID) {
+                                var item = {
+                                    IdentityName: common.currentUser.UserName,
+                                    ProductID: productId,
+                                    BuyPrice:prices.PriceValue,
+                                    BuyNum:prices.WaterNum
+                                }
+                                var postData ={"":[item]};
+                                console.log(postData)
+                                data.store.add.action(postData).done(function () {
+                                    common.showMessage("试用成功,请转到自服务门户查看!");
+                                    common.loading(false);
+                                }).fail(function () {
+                                    common.showMessage("添加订单失败,请联系网站管理员!");
+                                    common.loading(false);
+                                });
+                            }
+                            else {
+                                window.location = common.loginUrl;
+                            }
+                            $("#sq-common-search").modal("close");
+
+                        });
                     }
-                    data.store.add(item).done(function(){
-                        common.showMessage("试用成功,请转到自服务门户查看!");
-                    }).fail(function(){
-                        common.showMessage("添加订单失败,请联系网站管理员!");
-                    });
-                }
-                else{
-                    window.location = common.loginUrl;
-                }
+
+                });
+
             });
         }
     };

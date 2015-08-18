@@ -37,7 +37,6 @@ define(["app/http"],function($http){
             policy:{
                 desc:"政策法规",
                 action:function(pageIndex,pageSize){
-                    console.log(this)
                     return $http.get("/api/CMSContent/GetPolicyReguContents/?pageIndex="+pageIndex+"&pageSize="+pageSize);
                 }
             },
@@ -87,7 +86,6 @@ define(["app/http"],function($http){
                 desc:"商城商品的列表",
                 url:"/api/SiProduct/GetProductList",
                 action:function(pageIndex,pageSize,productName){
-                    console.log(productName)
                     var url = this.url+"?pageIndex="+pageIndex+"&pageSize="+pageSize+"&productName="+productName;
                     return $http.get(url);
                 }
@@ -100,11 +98,20 @@ define(["app/http"],function($http){
                     return $http.get(url);
                 }
             },
+            price:{
+                desc:"获取商品价格",
+                url:"/api/ECOrder/GetPriceByProductAndCount",
+                action:function(code,count){
+                    var url = this.url+"?strCode="+code+"&productCount="+count;
+                    return $http.get(url);
+                }
+            },
             add:{
                 desc:"试用商品",
-                url:"/api/ShoppingCart/Add",
+                url:"/api/ECOrder/POST",
                 action:function(json){
-                    return $http.put(this.url,json);
+                    console.log(json)
+                    return $http.post(this.url,json);
                 }
             }
         },
