@@ -297,7 +297,7 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
                                     IdentityName: common.currentUser.UserName,
                                     ProductID: productId,
                                     BuyPrice:prices.PriceValue,
-                                    BuyNum:prices.WaterNum
+                                    BuyNum:val
                                 }
                                 var postData ={"":[item]};
                                 console.log(postData)
