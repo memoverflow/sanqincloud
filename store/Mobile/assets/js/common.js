@@ -43,6 +43,7 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             {name:"list",url:"parts/list.html"},
             {name:"store",url:"parts/store.html"},
             {name:"details",url:"parts/details.html"},
+            {name:"alert",url:"parts/alert.html"},
             {name:"news",url:"parts/news.html"},
             {name:"search",url:"parts/search.html"},
             {name:"contact",url:"parts/contact.html"},
@@ -120,17 +121,20 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
                 //获取当前是否登录
                 data.user.action().done(function(result){
                     user = result;
-
                     if(result == null){
                        $(".am-topbar-login").find("a").text("登录").attr("href",common.loginUrl);
                     }else{
-                       $(".am-topbar-login").find("a").text("欢迎您 "+result.UserName);
+                        $(".am-topbar-login").hide();
+                        $("#sq-user-show").show().dropdown();
+                        $("#sq-user-banner").text("欢迎您 "+result.UserName);
                     }
                     cookie.set("user",JSON.stringify(user));
                     common.currentUser = user;
                 });
             }else{
-                $(".am-topbar-login").find("a").text("欢迎您 "+user.UserName);
+                $(".am-topbar-login").hide();
+                $("#sq-user-show").show().dropdown();
+                $("#sq-user-banner").text("欢迎您 "+user.UserName);
                 common.currentUser = user;
             }
 
@@ -144,13 +148,13 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             $("#sq-search-cancel").click(function(){$("#sq-common-search").modal("close");});
             $("#sq-search-confirm").click(function(){
                 var val = $(".am-modal-prompt-input").val();
-                window.location = "store.html?search="+val;
+                window.location = "store.html?search="+encodeURIComponent(val);
                 $("#sq-common-search").modal("close");
             });
         },
         helper:function(){
             Handlebars.registerHelper('txtsp', function(html) {
-                var result = html.replace(/<\/?.+?>/g,"").substr(0,80);
+                var result = html.replace(/<\/?.+?>/g,"").substr(0,54);
                 return new Handlebars.SafeString(result);
             });
             Handlebars.registerHelper('preview', function(img) {
@@ -218,7 +222,7 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
 
         getStoreList:function(pageIndex,pageSize){
             var query = this.queryString("search");
-            var productName = query == null?"": query;
+            var productName = query == null?"": decodeURIComponent(query);
             data.store.list.action(pageIndex,pageSize,productName).done(function(result){
                 common.hideMore(result,pageIndex,pageSize);
                 if(result == null || result.DataSource == null || result.DataSource.length == 0)
@@ -291,7 +295,6 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
                     var val = $("#am-number").val();
                     if(val > 0) {
                         data.store.price.action(code, val).done(function (prices) {
-                            console.log(val)
                             if (common.currentUser.UserID) {
                                 var item = {
                                     IdentityName: common.currentUser.UserName,
@@ -300,8 +303,7 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
                                     BuyNum:val
                                 }
                                 var postData ={"":[item]};
-                                console.log(postData)
-                                data.store.add.action(postData).done(function () {
+                                data.store.add.action(postData).done(function (result) {
                                     common.showMessage("试用成功,请转到自服务门户查看!");
                                     common.loading(false);
                                 }).fail(function () {

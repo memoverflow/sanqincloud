@@ -86,7 +86,7 @@ define(["app/http"],function($http){
                 desc:"商城商品的列表",
                 url:"/api/SiProduct/GetProductList",
                 action:function(pageIndex,pageSize,productName){
-                    var url = this.url+"?pageIndex="+pageIndex+"&pageSize="+pageSize+"&productName="+productName;
+                    var url = this.url+"?pageIndex="+pageIndex+"&pageSize="+pageSize+"&productName="+encodeURIComponent(productName);
                     return $http.get(url);
                 }
             },
@@ -110,7 +110,6 @@ define(["app/http"],function($http){
                 desc:"试用商品",
                 url:"/api/ECOrder/POST",
                 action:function(json){
-                    console.log(json)
                     return $http.post(this.url,json);
                 }
             }
