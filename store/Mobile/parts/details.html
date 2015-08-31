@@ -6,6 +6,16 @@
     </a>
 </p>
 <div class="am-page-content" id="am-details-container">
-    <h2 class="am-page-content-title"></h2>
-    <p id="am-content-html"></p>
+
+
 </div>
+<script id="sq-details-template" type="text/x-handlebars-template">
+    <h2 class="am-page-content-title">{{ProductName}}</h2>
+    <p id="am-content-html">{{{Description}}}</p>
+    <p class="am-store-img"><img src="/{{ProductLogo}}" width="100%" height="100%"></p>
+    <span class="am-store-price">¥{{Price}}</span>
+    <p class="am-store-links">
+        <a href="javascript:void(0)" data-id="{{ProductID}}" class="am-btn-tryout" data-price="{{Price}}" data-store="{{ProductCode}}">试用</a>
+        <a href="{{attachment Attachment}}">相关下载</a>
+    </p>
+</script>

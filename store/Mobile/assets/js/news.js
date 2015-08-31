@@ -17,18 +17,20 @@ define(["common","data"],function(common,data){
 
     var news = {
         titles:{
-            "信息公开":"notice",
-
+            "信息公开":"notice"
         },
         init:function(){
             common.renderParts()
-                .done(function(){
-                    common.loading(true);
-                    common.helper();
-                    common.getContent();
-                    common.getBanners(1,3);
-                    common.getLinks(1,8);
-                    common.init();
+                .done(function () {
+                    $(document).ready(function () {
+                        common.loading(true);
+                        common.helper();
+                        common.getContent();
+                        common.getBanners(1, 3);
+                        common.getLinks(1, 8);
+                        common.init();
+                    });
+                    
                 });
         }
     };

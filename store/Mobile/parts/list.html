@@ -1,15 +1,14 @@
 <div class="am-store-list">
-    <ul id="am-list-container">
-    </ul>
+    <ul id="am-list-container"></ul>
     <a class="am-store-more"><span></span><span></span><span></span></a>
 </div>
 <script id="sq-list-template" type="text/x-handlebars-template">
     {{#each result}}
-    <a  href="news.html?contentid={{ContentID}}">
-    <li style="padding: 20px 2rem 20px 20px;">
-        <strong class="am-store-title">{{ContentTitle}}</strong>
-        <p class="am-store-info">{{txtsp Description}}</p>
-    </li>
-        </a>
+    <a href="news.html?contentid={{ContentID}}">
+        <li style="padding: 20px 2rem 20px 20px;">
+            <strong class="am-store-title">{{ContentTitle}}</strong>
+            <p class="am-store-info">{{txtsp Description}}</p>
+        </li>
+    </a>
     {{/each}}
 </script>

@@ -18,15 +18,17 @@ define(["common","data"],function(common,data){
     var main = {
         init:function(){
             common.renderParts()
-                .done(function(){
-                    common.loading(true);
-                    common.helper();
-                    common.getBanners(1,3);
-                    common.getNews(1,13);
-                    common.getLinks(1,8);
-                    common.getCases(1,6);
-                    common.getHotApp(1,6);
-                    common.init();
+                .done(function () {
+                    $(document).ready(function () {
+                        common.loading(true);
+                        common.helper();
+                        common.getBanners(1, 3);
+                        common.getNews(1, 6);
+                        common.getLinks(1, 8);
+                        common.getCases(1, 6);
+                        common.getHotApp(1, 6);
+                        common.init();
+                    });
                 });
         }
     };

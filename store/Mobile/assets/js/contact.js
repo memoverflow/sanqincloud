@@ -19,12 +19,14 @@ define(["common","data"],function(common,data){
         currentIndex:1,
         init:function(){
             common.renderParts()
-                .done(function(){
-                    common.loading(true);
-                    common.helper();
-                    common.getLinks(1,8);
-                    common.getBanners(1,3);
-                    common.init();
+                .done(function () {
+                    $(document).ready(function () {
+                        common.loading(true);
+                        common.helper();
+                        common.getLinks(1, 8);
+                        common.getBanners(1, 3);
+                        common.init();
+                    });
                 });
 
         }

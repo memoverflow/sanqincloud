@@ -61,8 +61,10 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             {title:"体验中心",action:data.main.experience.action},
         ],
         loading:function(status){
-            if(!status){
+            if (!status) {
                 $("#modal").hide();
+            } else {
+                $("#modal").show();
             }
         },
         getPart: function(item) {
@@ -157,6 +159,10 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
                 var result = html.replace(/<\/?.+?>/g,"").substr(0,54);
                 return new Handlebars.SafeString(result);
             });
+            Handlebars.registerHelper('txtsubstr', function (html,num) {
+                var result = html.replace(/<\/?.+?>/g, "").substr(0, num);
+                return new Handlebars.SafeString(result);
+            });
             Handlebars.registerHelper('preview', function(img) {
                 var result = (img == ""|| img ==null)?"mobile/assets/images/preview.png":img;
                 return new Handlebars.SafeString(result);
@@ -196,14 +202,14 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             });
         },
         getHotApp:function(pageIndex,pageSize){
-            data.main.hotapp.action(pageIndex,pageSize).done(function(result){
+            data.main.hotapp.action(pageIndex, pageSize).done(function (result) {
                 common.compile("#sq-hotapp-template","#am-hotapp-container",{result:result.DataSource});
             }).fail(function(){
                 common.showMessage("获取信息数据失败!");
             });
         },
         getLinks:function(pageIndex,pageSize){
-            data.main.links.action(pageIndex,pageSize).done(function(result){
+            data.main.links.action(pageIndex, pageSize).done(function (result) {
                 common.compile("#sq-links-template","#am-links-container",{result:result.DataSource});
             }).fail(function(){
                 common.showMessage("获取综合服务数据失败!");
@@ -244,9 +250,9 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
         },
         getStoreDetails:function(){
             var id = this.queryString("id");
-            data.store.details.action(id).done(function(result){
-                $(".am-page-content-title").text(result.ProductName);
-                $("#am-content-html").html(result.Description);
+            data.store.details.action(id).done(function (result) {
+                common.compile("#sq-details-template", "#am-details-container", result);
+                common.addOrder();
                 common.loading(false);
             }).fail(function(){
                 common.showMessage("获取成功案例数据失败!");

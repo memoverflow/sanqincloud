@@ -19,14 +19,16 @@ define(["common","data"],function(common,data){
         currentIndex:1,
         init:function(){
             common.renderParts()
-                .done(function(){
-                    common.loading(true);
-                    common.helper();
-                    common.getBanners(1,3);
-                    common.getLinks(1,8);
-                    common.getStoreList(store.currentIndex,8);
-                    common.init();
-                    store.trigger();
+                .done(function () {
+                    $(document).ready(function () {
+                        common.loading(true);
+                        common.helper();
+                        common.getBanners(1,3);
+                        common.getLinks(1,8);
+                        common.getStoreList(store.currentIndex,8);
+                        common.init();
+                        store.trigger();
+                    });
                 });
 
         },

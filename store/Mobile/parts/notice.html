@@ -7,10 +7,12 @@
 </div>
 <script id="sq-news-template" type="text/x-handlebars-template">
     {{#each result}}
-    <a href="content.html?contentId={{ContentID}}">
+
     <li class="swiper-slide">
-        <strong>{{ContentTitle}}</strong>
-        <p>{{txtsp Description}}</p>
-    </li></a>
+        <a href="content.html?contentId={{ContentID}}">
+            <strong>{{txtsubstr ContentTitle 10}}</strong>
+            <p>{{txtsubstr Description 66}}</p>
+        </a>
+    </li>
     {{/each}}
 </script>
