@@ -82,8 +82,9 @@ define(["jquery","hbs","common","data"],function($,Handlebars,common,data){
         {
             flag:data.users.status.flagEnabel,
             id:"UserID",
-            callback:function(flag,userId){
-                return data.users.status.action(flag,[userId]);
+            callback: function (flag, userId) {
+                
+                return data.users.status.action(flag,{"":[userId]});
             },
             msg:"启用用户"
         },
@@ -91,7 +92,7 @@ define(["jquery","hbs","common","data"],function($,Handlebars,common,data){
             flag:data.users.status.flagForbidden,
             id:"UserID",
             callback:function(flag,userId){
-                return data.users.status.action(flag,[userId]);
+                return data.users.status.action(flag, { "": [userId] });
             },
             msg:"禁用用户"
         },
@@ -99,7 +100,7 @@ define(["jquery","hbs","common","data"],function($,Handlebars,common,data){
             flag:data.users.status.flagForSync,
             id:"UserID",
             callback:function(flag,userId){
-                return data.users.status.action(flag,[userId]);
+                return data.users.status.action(flag,{"":[userId]});
             },
             msg:"同步用户"
         }

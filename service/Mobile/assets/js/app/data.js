@@ -51,8 +51,8 @@ define(["app/http"],function($http){
                 flagEnabel:1,
                 flagForbidden:2,
                 flagForSync:3,
-                action:function(flag,dataJson){
-                    var url = this.url + "?opreate="+flag;
+                action: function (flag, dataJson) {
+                    var url = this.url + "?opreate=" + flag;
                     return $http.post(url,dataJson);
                 }
             },

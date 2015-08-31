@@ -84,7 +84,6 @@ define(["jquery","am","hbs","data","util","loader"],function($,UI,Handlebars,dat
         },
         get:function(dragger){
             eval(this.promise).done(function(result){
-                console.log(result)
                 common.instance = result.DataSource;
                 common.pageCount = Math.ceil(result.TotalRecord/common.staticPageSize);
                 common.compile("#sq-common-template","#sq-common-container",{result:common.instance});

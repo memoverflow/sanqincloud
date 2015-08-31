@@ -12,7 +12,8 @@ require.config({
         "jquery" : 'libs/jquery.min',
         "am" : "libs/amazeui.min",
         "hbs" : "libs/handlebars.min",
-        "data": "app/data"
+        "data": "app/data",
+        "hc": "libs/highcharts"
     },
     waitSeconds: 10
 });
@@ -20,7 +21,7 @@ require.config({
 /*
 默认加载主模块
  */
-define(["jquery","am","hbs","data"],function($,UI,Handlebars,data){
+define(["jquery","am","hbs","data","hc"],function($,UI,Handlebars,data,hc){
     "use strict"
     
     var sq = {
@@ -97,7 +98,68 @@ define(["jquery","am","hbs","data"],function($,UI,Handlebars,data){
 
             }
 
+        },
+        init:function(){
+            data.orders.chart.action().done(function (result) {
+                console.log(result)
+                $('.am-container').highcharts({
+                    chart: {
+                        type: 'line',
+                    },
+                    lang: {
+                        noData: "没有相关数据"
+                    },
+                    noData: {
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '15px',
+                            color: '#303030'
+                        }
+                    },
+                    title: {
+                        text: "消费情况表",
+                    },
+                    legend: {
+                        enabled: false,
+                    },
+                    credits: false,
+                    xAxis: {
+                        categories: [],
+                        labels: {
+                            format: '{value}月'
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        //minTickInterval: 3,
+                        title: {
+                            text: '消费金额 (元)'
+                        }
+                    },
+                    tooltip: {
+                        enabled: false,
+                        formatter: function () {
+                            return '<b>' + this.series.name + '</b><br/>' + this.x + ': ' + this.y + '元';
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [{
+                        name: "消费情况",
+                        data: result
+                    }]
+                });
+            }).fail(function(result){
+                console.log(result)
+            });
         }
     };
     sq.user.get();
+    sq.init();
 });
