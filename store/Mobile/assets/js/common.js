@@ -83,9 +83,8 @@ define(["jquery","am","hbs","data","swiper"],function($,UI,Handlebars,data,swipe
             var promises = parts.map(common.getPart);
             return $.when.apply(this, promises).then(function(){
                 $(arguments).each(function(i){
-                    if(parts[i].name == "head") {
+                    if(parts[i].name == "head") 
                         $("head").html(this[0]);
-                    }
                     else
                         $("#"+parts[i].name).html(this[0]);
                 });
