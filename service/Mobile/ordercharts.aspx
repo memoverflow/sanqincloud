@@ -1,3 +1,4 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ordercharts.aspx.cs" Inherits="Microsoft.Cloud.Portal.Service.Mobile.ordercharts" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -45,51 +46,57 @@
 <!--头文件结束-->
 <!--弹出菜单开始-->
 <nav data-am-widget="menu" class="am-menu   am-menu-offcanvas1" data-am-menu-offcanvas>
-    <a href="javascript: void(0)" class="am-menu-toggle">
-        <i class="am-menu-toggle-icon am-icon-bars"></i>
-    </a>
-    <div class="am-offcanvas" >
-        <div class="am-offcanvas-bar am-offcanvas-bar-flip">
-            <ul class="am-menu-nav am-avg-sm-1">
+        <a href="javascript: void(0)" class="am-menu-toggle">
+            <i class="am-menu-toggle-icon am-icon-bars"></i>
+        </a>
+        <div class="am-offcanvas" >
+            <div class="am-offcanvas-bar am-offcanvas-bar-flip">
+                <ul class="am-menu-nav am-avg-sm-1">
 
-                <li class="am-parent">
-                    <a href="##" class="">用户管理</a>
-                    <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
-                        <li class="">
-                            <a href="users.html" class=""><span class="am-icon-user"></span> 人员管理</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="am-parent">
+                        <a href="##" class="">用户管理</a>
+                        <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
+                            <li class="">
+                                <a href="users.aspx" class=""><span class="am-icon-user"></span> 人员管理</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            </ul>
-            <ul class="am-menu-nav am-avg-sm-1">
-                <li class="am-parent">
-                    <a href="##" class="">订单管理</a>
-                    <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
-                        <li class="">
-                            <a href="ordercharts.html" class=""><span class="am-icon-line-chart"></span> 图表展示</a>
-                            <a href=orders.html class=""><span class="am-icon-file"></span>  &nbsp;我的订单</a>
-                        </li>
-                    </ul>
-                </li>
+                </ul>
+                <ul class="am-menu-nav am-avg-sm-1">
+                    <li class="am-parent">
+                        <a href="##" class="">订单管理</a>
+                        <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
+                            <li class="">
+                                <a href="ordercharts.aspx" class=""><span class="am-icon-line-chart"></span> 图表展示</a>
+                                <a href="orders.aspx" class=""><span class="am-icon-file"></span>  &nbsp;我的订单</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            </ul>
-            <ul class="am-menu-nav am-avg-sm-1">
-                <li class="am-parent">
-                    <a href="##" class="">产品管理</a>
-                    <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
-                        <li class="">
-                            <a href="products.html" class=""><span class="am-icon-play"></span> 产品开通</a>
-                            <a href=myproducts.html class=""><span class="am-icon-gift"></span>  我的产品</a>
-                        </li>
-                    </ul>
-                </li>
+                </ul>
+                <ul class="am-menu-nav am-avg-sm-1">
+                    <li class="am-parent">
+                        <a href="##" class="">产品管理</a>
+                        <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
+                            <li class="">
+                                <a href="products.aspx" class=""><span class="am-icon-play"></span> 产品开通</a>
+                                <a href="myproducts.aspx" class=""><span class="am-icon-gift"></span>  我的产品</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            </ul>
+                </ul>
+
+                <ul class="am-menu-nav am-avg-sm-1">
+                    <li class="am-parent">
+                        <a href="http://http://www.sanqincloud.com/mobile/index.html" class="">回到商店</a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
-
+    </nav>
 
 <!--弹出菜单结束-->
 <!--主页菜单开始-->

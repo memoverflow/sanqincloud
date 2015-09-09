@@ -1,3 +1,4 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="users.aspx.cs" Inherits="Microsoft.Cloud.Portal.Service.Mobile.users" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -45,54 +46,61 @@
 <!--头文件结束-->
 <!--弹出菜单开始-->
 <nav data-am-widget="menu" class="am-menu   am-menu-offcanvas1" data-am-menu-offcanvas>
-    <a href="javascript: void(0)" class="am-menu-toggle">
-        <i class="am-menu-toggle-icon am-icon-bars"></i>
-    </a>
-    <div class="am-offcanvas" >
-        <div class="am-offcanvas-bar am-offcanvas-bar-flip">
-            <ul class="am-menu-nav am-avg-sm-1">
+        <a href="javascript: void(0)" class="am-menu-toggle">
+            <i class="am-menu-toggle-icon am-icon-bars"></i>
+        </a>
+        <div class="am-offcanvas" >
+            <div class="am-offcanvas-bar am-offcanvas-bar-flip">
+                <ul class="am-menu-nav am-avg-sm-1">
 
-                <li class="am-parent">
-                    <a href="##" class="">用户管理</a>
-                    <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
-                        <li class="">
-                            <a href="users.html" class=""><span class="am-icon-user"></span> 人员管理</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="am-parent">
+                        <a href="##" class="">用户管理</a>
+                        <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
+                            <li class="">
+                                <a href="users.aspx" class=""><span class="am-icon-user"></span> 人员管理</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            </ul>
-            <ul class="am-menu-nav am-avg-sm-1">
-                <li class="am-parent">
-                    <a href="##" class="">订单管理</a>
-                    <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
-                        <li class="">
-                            <a href="ordercharts.html" class=""><span class="am-icon-line-chart"></span> 图表展示</a>
-                            <a href=orders.html class=""><span class="am-icon-file"></span>  &nbsp;我的订单</a>
-                        </li>
-                    </ul>
-                </li>
+                </ul>
+                <ul class="am-menu-nav am-avg-sm-1">
+                    <li class="am-parent">
+                        <a href="##" class="">订单管理</a>
+                        <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
+                            <li class="">
+                                <a href="ordercharts.aspx" class=""><span class="am-icon-line-chart"></span> 图表展示</a>
+                                <a href="orders.aspx" class=""><span class="am-icon-file"></span>  &nbsp;我的订单</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            </ul>
-            <ul class="am-menu-nav am-avg-sm-1">
-                <li class="am-parent">
-                    <a href="##" class="">产品管理</a>
-                    <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
-                        <li class="">
-                            <a href="products.html" class=""><span class="am-icon-play"></span> 产品开通</a>
-                            <a href=myproducts.html class=""><span class="am-icon-gift"></span>  我的产品</a>
-                        </li>
-                    </ul>
-                </li>
+                </ul>
+                <ul class="am-menu-nav am-avg-sm-1">
+                    <li class="am-parent">
+                        <a href="##" class="">产品管理</a>
+                        <ul class="am-menu-sub am-collapse  am-avg-sm-3 ">
+                            <li class="">
+                                <a href="products.aspx" class=""><span class="am-icon-play"></span> 产品开通</a>
+                                <a href="myproducts.aspx" class=""><span class="am-icon-gift"></span>  我的产品</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            </ul>
+                </ul>
+
+                <ul class="am-menu-nav am-avg-sm-1">
+                    <li class="am-parent">
+                        <a href="http://http://www.sanqincloud.com/mobile/index.html" class="">回到商店</a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 <!--弹出菜单结束-->
 <!--主页菜单开始-->
 <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
-    <h2 class="am-titlebar-title ">我的产品</h2>
+    <h2 class="am-titlebar-title ">人员管理</h2>
 </div>
 <!--人员列表开始-->
 <section id="sq-common-container" data-am-widget="accordion" class="am-accordion am-accordion-default"
@@ -102,40 +110,44 @@
 <script id="sq-common-template" type="text/x-handlebars-template">
     {{#each result}}
     <dl class="am-accordion-item" >
-        <dt class="am-accordion-title">{{ProductName}}<a data-tag="{{@index}}" href="javascript:void(0)" class="am-badge am-badge-success am-radius am-fr"><i class="am-icon-edit"></i> 编辑</a></dt>
+        <dt class="am-accordion-title">{{Name}}<a data-tag="{{@index}}" href="javascript:void(0)" class="am-badge am-badge-success am-radius am-fr"><i class="am-icon-edit"></i> 编辑</a></dt>
         <dd class="am-accordion-bd am-collapse">
             <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
             <div class="am-accordion-content">
                 <table class="am-table am-table-bordered">
                     <tbody>
-                    <tr>
-                        <td class="am-active">用户名称</td>
-                        <td>{{Name}}</td>
-                    </tr>
-                    <tr>
-                        <td class="am-active">状态</td>
-                        <td>{{status Status}}</td>
-                    </tr>
-                    <tr>
-                        <td class="am-active">同步状态</td>
-                        <td>{{sync IsSync}}</td>
-                    </tr>
-                    <tr>
-                        <td class="am-active">生效时间</td>
-                        <td>{{date EffectTime}}</td>
-                    </tr>
-                    <tr>
-                        <td class="am-active">失效时间</td>
-                        <td>{{date ExpiredTime}}</td>
-                    </tr>
-                    <tr>
-                        <td class="am-active">访问地址</td>
-                        <td>{{link LinkUrl}}</td>
-                    </tr>
-                    <tr>
-                        <td class="am-active">创建时间</td>
-                        <td>{{date CreateTime}}</td>
-                    </tr>
+                        <tr>
+                            <td class="am-active">企业编码</td>
+                            <td>{{ECCode}}</td>
+                        </tr>
+                        <tr>
+                            <td class="am-active">登录名</td>
+                            <td>{{UserName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="am-active">性别</td>
+                            <td>{{gender Gender}}</td>
+                        </tr>
+                        <tr>
+                            <td class="am-active">同步状态</td>
+                            <td>{{sync IsSync}}</td>
+                        </tr>
+                        <tr>
+                            <td class="am-active">用户状态</td>
+                            <td>{{status Status}}</td>
+                        </tr>
+                        <tr>
+                            <td class="am-active">Email地址</td>
+                            <td>{{Email}}</td>
+                        </tr>
+                        <tr>
+                            <td class="am-active">手机号码</td>
+                            <td>{{Mobile}}</td>
+                        </tr>
+                        <tr>
+                            <td class="am-active">创建时间</td>
+                            <td>{{date CreateTime}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -182,7 +194,7 @@
 <script id="sq-toolbar-template" type="text/x-handlebars-template">
     <div class="am-modal-actions-group">
         <ul class="am-list">
-            <li class="am-modal-actions-header">修改产品: {{FullName}}</li>
+            <li class="am-modal-actions-header">修改用户: {{FullName}}</li>
             <li>
                 <a href="javascript:void(0)"><span class="am-icon-play"></span> 启用</a>
             </li>
@@ -190,7 +202,7 @@
                 <a href="javascript:void(0)"><span class="am-icon-minus-square"></span> 禁用</a>
             </li>
             <li>
-                <a href="javascript:void(0)"><span class="am-icon-exchange"></span> 重新同步</a>
+                <a href="javascript:void(0)"><span class="am-icon-exchange"></span> 同步</a>
             </li>
         </ul>
     </div>
@@ -202,9 +214,9 @@
 <!--查询用户开始-->
 <div class="am-modal am-modal-prompt" tabindex="-1" id="sq-common-search">
     <div class="am-modal-dialog">
-        <div class="am-modal-hd">查询产品</div>
+        <div class="am-modal-hd">查询用户</div>
         <div class="am-modal-bd">
-            请输入产品名
+            请输入用户名
             <input type="text" class="am-modal-prompt-input">
         </div>
         <div class="am-modal-footer">
@@ -222,6 +234,6 @@
     </a>
 </div>
 <!--回到顶部结束-->
-<script src="assets/js/libs/require.js" data-main="assets/js/myproducts" type="application/javascript"></script>
+<script src="assets/js/libs/require.js" data-main="assets/js/users" type="application/javascript"></script>
 </body>
 </html>
