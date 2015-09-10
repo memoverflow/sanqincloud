@@ -8,7 +8,7 @@
     <meta name="keywords" content="三秦,企业云,西咸,微软">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>用户管理</title>
+    <title>产品列表</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -107,6 +107,8 @@
          data-am-accordion='{ "multiple": true }'>
     <span class="am-cf am-center"><i class="am-icon-spinner am-icon-pulse"></i> 加载中...</span>
 </section>
+    <div id="am-load-more" class="am-text-center"><i class="am-icon-arrow-down"></i> 点击加载更多数据...</div>
+
 <script id="sq-common-template" type="text/x-handlebars-template">
     {{#each result}}
     <dl class="am-accordion-item" >
@@ -219,15 +221,13 @@
         <div class="am-modal-hd">开通产品</div>
         <div class="am-modal-bd">
             <form class="am-form" id="sq-form-enable" data-am-validator>
-                <div class="am-form-group">
-                    <input type="text" id="sq-vld-code"  placeholder="请输入编码" required/>
+                <div id="am-dynamic-group" class="am-form-group">
+                    
                 </div>
                 <div class="am-form-group">
-                    <input type="text" id="sq-vld-title" placeholder="请输入标题"  required/>
-                </div>
-
-                <div class="am-form-group">
-                    <input type="text" id="sq-vld-userid" placeholder="请输入用户编号"  required/>
+                    <select id="am-users" class=" am-input-sm">
+                      
+                    </select>
                 </div>
                 <div class="am-form-group">
                     <button type="button" id="sq-modal-enable-cancel" class="am-btn am-btn-warning ui-btn-static">取消</button>

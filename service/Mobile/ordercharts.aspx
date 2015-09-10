@@ -8,7 +8,7 @@
     <meta name="keywords" content="三秦,企业云,西咸,微软">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>用户管理</title>
+    <title>订单视图</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->

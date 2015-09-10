@@ -110,6 +110,48 @@ define(["app/http"],function($http){
                     return $http.post(url,dataJson);
                 }
             },
+            productExpand:{
+                url:"/api/ECProductLincese/",
+                desc:"获取产品扩展",
+                action:function(productId){
+                    return $http.get(this.url + "?productId=" + productId);
+                }
+            },
+            auditUsers: {
+                url: "/api/ecuser/",
+                desc: "获取授权产品的用户信息",
+                action: function (params) {
+                    var sortedBy = params.sortedBy;
+                    var sortDir = params.sortDir;
+                    var pageIndex = params.pageIndex;
+                    var pageSize = params.pageSize;
+                    var ecCode = params.ecCode;
+                    var productId = params.productId;
+                    return $http.get(this.url + "?pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&sortBy=" + sortedBy + "&sortDir=" + sortDir + "&ECCode=" + ecCode + "&ProductID=" + productId);
+
+                }
+            },
+            noAuditUsers: {
+                url: "/api/ecuser/",
+                desc: "获取未授权产品的用户信息",
+                action: function (params) {
+                    var sortedBy = params.sortedBy;
+                    var sortDir = params.sortDir;
+                    var pageIndex = params.pageIndex;
+                    var pageSize = params.pageSize;
+                    var ecCode = params.ecCode;
+                    return $http.get(this.url + "?pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&sortBy=" + sortedBy + "&sortDir=" + sortDir + "&ECCode=" + ecCode );
+
+                }
+            },
+            auditProductLincese: {
+                url: "/api/ECProductLincese/",
+                desc: "授权产品",
+                action: function (flag,info) {
+                    return $http.post(this.url+"?flag="+ flag, info);
+
+                }
+            }
         },
         myproducts:{
             desc:"我的产品管理",
@@ -132,7 +174,7 @@ define(["app/http"],function($http){
                 flagForSync:3,
                 action:function(flag,dataJson){
                     var url = this.url + "?opreate="+flag;
-                    return $http.post(url,dataJson);
+                    return $http.put(url,dataJson);
                 }
             }
         },

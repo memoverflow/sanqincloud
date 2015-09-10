@@ -65,25 +65,25 @@ define(["jquery","hbs","common","data"],function($,Handlebars,common,data){
     common.array = [
         {
             flag:data.myproducts.status.flagEnabel,
-            id:"ProductID",
-            callback:function(flag,productId){
-                return data.myproducts.status.action(flag,[{ECProductID:productId}]);
+            id: "ECProductID",
+            callback: function (flag, productId) {
+                return data.myproducts.status.action(flag, { "": [{"ECProductID":productId}]});
             },
             msg:"启用"
         },
         {
             flag:data.myproducts.status.flagForbidden,
-            id:"ProductID",
+            id:"ECProductID",
             callback:function(flag,productId){
-                return data.myproducts.status.action(flag,[{ECProductID:productId}]);
+                return data.myproducts.status.action(flag, { "": [{ "ECProductID": productId }] });
             },
             msg:"禁用"
         },
         {
             flag:data.myproducts.status.flagForSync,
-            id:"ProductID",
+            id: "ECProductID",
             callback:function(flag,productId){
-                return data.myproducts.status.action(flag,[{ECProductID:productId}]);
+                return data.myproducts.status.action(flag, { "": [{ "ECProductID": productId }] });
             },
             msg:"重新同步"
         }

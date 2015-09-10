@@ -8,7 +8,7 @@
     <meta name="keywords" content="三秦,企业云,西咸,微软">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, order-scalable=no">
-    <title>用户管理</title>
+    <title>我的订单</title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
@@ -108,6 +108,9 @@
          data-am-accordion='{ "multiple": true }'>
     <span class="am-cf am-center"><i class="am-icon-spinner am-icon-pulse"></i> 加载中...</span>
 </section>
+    
+<div id="am-load-more" class="am-text-center"><i class="am-icon-arrow-down"></i> 点击加载更多数据...</div>
+
 <script id="sq-common-template" type="text/x-handlebars-template">
     {{#each result}}
     <dl class="am-accordion-item" >

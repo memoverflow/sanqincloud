@@ -106,7 +106,8 @@
 <section id="sq-common-container" data-am-widget="accordion" class="am-accordion am-accordion-default"
          data-am-accordion='{ "multiple": true }'>
     <span class="am-cf am-center"><i class="am-icon-spinner am-icon-pulse"></i> 加载中...</span>
-</section>
+</section> 
+<div id="am-load-more" class="am-text-center"><i class="am-icon-arrow-down"></i> 点击加载更多数据...</div>
 <script id="sq-common-template" type="text/x-handlebars-template">
     {{#each result}}
     <dl class="am-accordion-item" >
